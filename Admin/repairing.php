@@ -19,7 +19,7 @@
             <div class="row">
               <div class="col-12">
                 <div class="table-responsive">
-                  <table id="order-listing" class="table">
+                  <table id="order-listing" class="table table-dark">
                     <thead>
                       <tr>
                         <th>รหัสอุปกรณ์</th>
@@ -44,6 +44,7 @@
                                   order by Priority  DESC";
                             $result = mysqli_query($conn,$sql);
                             while ($fetch = mysqli_fetch_assoc($result)){   
+                              if($fetch['FixStatus'] == "รอดำเนินการ"){
                           ?>
                       <tr>
                         <td><?php echo $fetch['EquipmentID']?></td>
@@ -51,8 +52,8 @@
                         <td><?php echo $fetch['FixDetail']?></td>
                         <td><?php echo $fetch['FixDate']?></td>
                         <td><?php echo $fetch['Equipmentplace']?></td>
-                        <td><?php echo $fetch['FixStatus']?></td>
-                        <td><?php echo $fetch['Priority']?></td>
+                        <td><label class="badge badge-warning"><?php echo $fetch['FixStatus']?></td>
+                        <td ><div class="badge badge-pill badge-primary"><?php echo $fetch['Priority']?></div></td>
                         <td>
                           <div class="dropdown">
                             <select id="Priority" id="Priority"
@@ -70,6 +71,7 @@
                           <div class="dropdown">
                             <select name="FixStatus" id="FixStatus"
                               onchange="window.location.href='updatefixstatus.php?FixStatus='+this.value">
+                              <option >แก้ไขสถานะ</option>
                               <?php
                                 $strSQL = "SELECT * FROM FixStatus ORDER BY FixStatus ASC";
                                 $objQuery = mysqli_query($conn,$strSQL);
@@ -77,14 +79,104 @@
                               ?>
                               <option value="<?php echo $objResuut["FixStatus"]."-".$fetch['EquipmentID'];?>">
                                 <?php echo $objResuut["FixStatus"];?></option>
-                              <?php } } ?>
+                              <?php } ?>
                             </select>
                           </div>
                         </td>
                       </tr>
+                      <?php
+                            }
+                        if($fetch['FixStatus'] == "กำลังดำเนินการ"){
+                      ?>
+                      <tr>
+                        <td><?php echo $fetch['EquipmentID']?></td>
+                        <td><?php echo $fetch['EquipmentName']?></td>
+                        <td><?php echo $fetch['FixDetail']?></td>
+                        <td><?php echo $fetch['FixDate']?></td>
+                        <td><?php echo $fetch['Equipmentplace']?></td>
+                        <td><label class="badge badge-info"><?php echo $fetch['FixStatus']?></td>
+                        <td ><div class="badge badge-pill badge-primary"><?php echo $fetch['Priority']?></div></td>
+                        <td>
+                          <div class="dropdown">
+                            <select id="Priority" id="Priority"
+                              onchange="window.location.href='updatepriority.php?Priority='+this.value">
+                              <option >ระดับความสำคัญ</option>
+                              <option value="<?php echo '1'."-". $fetch['EquipmentID'];?>">1</option>
+                              <option value="<?php echo '2'."-". $fetch['EquipmentID'];?>">2</option>
+                              <option value="<?php echo '3'."-". $fetch['EquipmentID'];?>">3</option>
+                              <option value="<?php echo '4'."-". $fetch['EquipmentID'];?>">4</option>
+                              <option value="<?php echo '5'."-". $fetch['EquipmentID'];?>">5</option>
+                            </select>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="dropdown">
+                            <select name="FixStatus" id="FixStatus"
+                              onchange="window.location.href='updatefixstatus.php?FixStatus='+this.value">
+                              <option >แก้ไขสถานะ</option>
+                              <?php
+                                $strSQL = "SELECT * FROM FixStatus ORDER BY FixStatus ASC";
+                                $objQuery = mysqli_query($conn,$strSQL);
+                                while($objResuut = mysqli_fetch_array($objQuery)){
+                              ?>
+                              <option value="<?php echo $objResuut["FixStatus"]."-".$fetch['EquipmentID'];?>">
+                                <?php echo $objResuut["FixStatus"];?></option>
+                              <?php } ?>
+                            </select>
+                          </div>
+                        </td>
+                      </tr>
+                      <?php
+                            }
+                        if($fetch['FixStatus'] == "ดำเนินการเสร็จสิ้น"){
+                      ?>
+                      <tr>
+                        <td><?php echo $fetch['EquipmentID']?></td>
+                        <td><?php echo $fetch['EquipmentName']?></td>
+                        <td><?php echo $fetch['FixDetail']?></td>
+                        <td><?php echo $fetch['FixDate']?></td>
+                        <td><?php echo $fetch['Equipmentplace']?></td>
+                        <td><label class="badge badge-success"><?php echo $fetch['FixStatus']?></td>
+                        <td ><div class="badge badge-pill badge-primary"><?php echo $fetch['Priority']?></div></td>
+                        <td>
+                          <div class="dropdown">
+                            <select id="Priority" id="Priority"
+                              onchange="window.location.href='updatepriority.php?Priority='+this.value">
+                              <option >ระดับความสำคัญ</option>
+                              <option value="<?php echo '1'."-". $fetch['EquipmentID'];?>">1</option>
+                              <option value="<?php echo '2'."-". $fetch['EquipmentID'];?>">2</option>
+                              <option value="<?php echo '3'."-". $fetch['EquipmentID'];?>">3</option>
+                              <option value="<?php echo '4'."-". $fetch['EquipmentID'];?>">4</option>
+                              <option value="<?php echo '5'."-". $fetch['EquipmentID'];?>">5</option>
+                            </select>
+                          </div>
+                        </td>
+                        <td>
+                          <div class="dropdown">
+                            <select name="FixStatus" id="FixStatus"
+                              onchange="window.location.href='updatefixstatus.php?FixStatus='+this.value">
+                              <option >แก้ไขสถานะ</option>
+                              <?php
+                                $strSQL = "SELECT * FROM FixStatus ORDER BY FixStatus ASC";
+                                $objQuery = mysqli_query($conn,$strSQL);
+                                while($objResuut = mysqli_fetch_array($objQuery)){
+                              ?>
+                              <option value="<?php echo $objResuut["FixStatus"]."-".$fetch['EquipmentID'];?>">
+                                <?php echo $objResuut["FixStatus"];?></option>
+                              <?php } ?>
+                            </select>
+                          </div>
+                        </td>
+                      </tr>
+                      <?php
+                        }}
+                      ?>
                     </tbody>
 
                   </table>
+                  
+
+                  
                 </div>
               </div>
             </div>

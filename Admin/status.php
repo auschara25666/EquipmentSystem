@@ -19,7 +19,7 @@
             <div class="row">
               <div class="col-12">
                 <div class="table-responsive">
-                  <table id="order-listing" class="table">
+                  <table id="order-listing" class="table table-dark">
                     <thead>
                       <tr>
                         <th>หมายเลขครุภัณฑ์</th>
@@ -27,7 +27,6 @@
                         <th>ประเภท</th>
                         <th>สถานะ</th>
                         <th>แก้ไขสถานะ</th>
-
                       </tr>
                     </thead>
                     <tbody>
@@ -40,13 +39,14 @@
                             where Equipment.Status = Status.Status and Equipment.EquipmentTypeID = EquipmentType.EquipmentTypeID
                             order by Equipment.EquipmentID ASC";
                             $result = mysqli_query($conn,$sql);
-                            while ($fetch = mysqli_fetch_assoc($result)){   
+                            while ($fetch = mysqli_fetch_assoc($result)){  
+                              if ($fetch["Status"] == "ปกติ"){ 
                           ?>
                       <tr>
                         <td><?php echo $fetch['EquipmentID']?></td>
                         <td><?php echo $fetch['EquipmentName']?></td>
                         <td><?php echo $fetch['EquipmentType']?></td>
-                        <td><?php echo $fetch['Status']?></td>
+                        <td ><label class="badge badge-success"><?php echo $fetch['Status']?></label></td>
                         <td>
                           <div class="dropdown">
                             <select name="Status" id="Status"
@@ -60,12 +60,98 @@
                                     ?>
                               <option value="<?php echo $objResuut["Status"]."-".$fetch['EquipmentID'];?>">
                                 <?php echo $objResuut["Status"];?></option>
-                              <?php } }?>
+                              <?php } ?>
                             </select>
                           </div>
                           </div>
                         </td>
                       </tr>
+                      <?php
+                              }
+                        if ($fetch["Status"] == "กำลังซ่อม"){ 
+                      ?>
+                        <tr>
+                        <td><?php echo $fetch['EquipmentID']?></td>
+                        <td><?php echo $fetch['EquipmentName']?></td>
+                        <td><?php echo $fetch['EquipmentType']?></td>
+                        <td ><label class="badge badge-info"><?php echo $fetch['Status']?></label></td>
+                        <td>
+                          <div class="dropdown">
+                            <select name="Status" id="Status"
+                              onchange="window.location.href='update.php?Status='+this.value">
+                              <option >แก้ไขสถานะ</option>
+                              <?php
+                                      $strSQL = "SELECT * FROM Status ORDER BY Status ASC";
+                                      $objQuery = mysqli_query($conn,$strSQL);
+                                      while($objResuut = mysqli_fetch_array($objQuery)){
+                                      
+                                    ?>
+                              <option value="<?php echo $objResuut["Status"]."-".$fetch['EquipmentID'];?>">
+                                <?php echo $objResuut["Status"];?></option>
+                              <?php }?>
+                            </select>
+                          </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <?php
+                        }
+                        if ($fetch["Status"] == "ชำรุด"){ 
+                      ?>
+                        <tr>
+                        <td><?php echo $fetch['EquipmentID']?></td>
+                        <td><?php echo $fetch['EquipmentName']?></td>
+                        <td><?php echo $fetch['EquipmentType']?></td>
+                        <td ><label class="badge badge-danger"><?php echo $fetch['Status']?></label></td>
+                        <td>
+                          <div class="dropdown">
+                            <select name="Status" id="Status"
+                              onchange="window.location.href='update.php?Status='+this.value">
+                              <option >แก้ไขสถานะ</option>
+                              <?php
+                                      $strSQL = "SELECT * FROM Status ORDER BY Status ASC";
+                                      $objQuery = mysqli_query($conn,$strSQL);
+                                      while($objResuut = mysqli_fetch_array($objQuery)){
+                                      
+                                    ?>
+                              <option value="<?php echo $objResuut["Status"]."-".$fetch['EquipmentID'];?>">
+                                <?php echo $objResuut["Status"];?></option>
+                              <?php }?>
+                            </select>
+                          </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <?php
+                        }
+                        if ($fetch["Status"] == "ถูกยืม"){ 
+                      ?>
+                        <tr>
+                        <td><?php echo $fetch['EquipmentID']?></td>
+                        <td><?php echo $fetch['EquipmentName']?></td>
+                        <td><?php echo $fetch['EquipmentType']?></td>
+                        <td ><label class="badge badge-warning"><?php echo $fetch['Status']?></label></td>
+                        <td>
+                          <div class="dropdown">
+                            <select name="Status" id="Status"
+                              onchange="window.location.href='update.php?Status='+this.value">
+                              <option >แก้ไขสถานะ</option>
+                              <?php
+                                      $strSQL = "SELECT * FROM Status ORDER BY Status ASC";
+                                      $objQuery = mysqli_query($conn,$strSQL);
+                                      while($objResuut = mysqli_fetch_array($objQuery)){
+                                      
+                                    ?>
+                              <option value="<?php echo $objResuut["Status"]."-".$fetch['EquipmentID'];?>">
+                                <?php echo $objResuut["Status"];?></option>
+                              <?php }?>
+                            </select>
+                          </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <?php } }?>
+
                     </tbody>
 
                   </table>
