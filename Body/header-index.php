@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <?php
-  ini_set('display_errors', 1);
-  error_reporting(E_ALL);
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
-  require_once 'Config/connect.php';
+require_once 'Config/connect.php';
 ?>
 <html lang="en">
+
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -18,9 +19,10 @@
   <!-- plugin css for this page -->
   <!-- End plugin css for this page -->
   <!-- inject:css -->
-  <link rel="stylesheet" href="css/vertical-layout-dark/style.css?v=1001">
+  <link rel="stylesheet" href="css/vertical-layout-light/style.css?v=1001">
   <!-- endinject -->
   <link rel="shortcut icon" href="images/logoh1.png" />
 
 </head>
+
 <body>

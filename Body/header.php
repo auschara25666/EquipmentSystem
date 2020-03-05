@@ -14,13 +14,12 @@
   <link rel="stylesheet" href="../vendors/iconfonts/mdi/font/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="../vendors/css/vendor.bundle.base.css">
   <link rel="stylesheet" href="../vendors/css/vendor.bundle.addons.css">
-  <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css"> -->
   
   <!-- endinject -->
   <!-- plugin css for this page -->
   <!-- End plugin css for this page -->
   <!-- inject:css -->
-  <link rel="stylesheet" href="../css/vertical-layout-dark/style.css?v=1001">
+  <link rel="stylesheet" href="../css/vertical-layout-light/style.css?v=1001">
   <!-- endinject -->
   <link rel="shortcut icon" href="../images/logoh1.png" />
 
