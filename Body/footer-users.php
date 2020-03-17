@@ -14,9 +14,11 @@
                 <script src="../vendors/js/vendor.bundle.base.js"></script>
                 <script src="../vendors/js/vendor.bundle.addons.js"></script>
                 <!-- endinject -->
-                <script src="../js/template.js"></script>
+                <!-- Plugin js for this page-->
+                <!-- End plugin js for this page-->
+                <!-- inject:js -->
+
                 <!-- endinject -->
                 <!-- Custom js for this page-->
                 <script src="../js/data-table.js"></script>
-                <!-- <script src="../js/app.js"></script> -->
                 <!-- End custom js for this page-->

@@ -10,11 +10,12 @@ $EquipmentTypeID = $_GET["EquipmentTypeID"];
 $EquipmentName = $_GET["EquipmentName"];
 $Equipmentplace = $_GET["Equipmentplace"];
 $Detail = $_GET["Detail"];
+$Permission = $_GET["Permission"];
 
 $EquipmentID = $Year.'/02'.$EquipmentTypeID.'00-'.$ID;
 
-$sql = "INSERT INTO Equipment(EquipmentID,EquipmentImg,EquipmentTypeID, EquipmentName,Detail,Equipmentplace, Status)  
-           VALUES('$EquipmentID','','$EquipmentTypeID', '$EquipmentName','$Detail', '$Equipmentplace','ปกติ')";
+$sql = "INSERT INTO Equipment(EquipmentID,EquipmentImg,EquipmentTypeID, EquipmentName,fiscal_year,Detail,Equipmentplace, AddDate,Status,Permission)  
+           VALUES('$EquipmentID','','$EquipmentTypeID', '$EquipmentName','$Year','$Detail', '$Equipmentplace',CURDATE(),'ปกติ','$Permission')";
 
 $result = mysqli_query($conn, $sql) or die("Error in query: $sql " . mysqli_error($conn) . "<br>$sql");
 
@@ -29,5 +30,3 @@ if ($result) {
      echo "alert('เพิ่มข้อมูลครุภัณฑ์ ไม่สำเร็จ!!');";
      echo "</script>";
 }
-
-?>

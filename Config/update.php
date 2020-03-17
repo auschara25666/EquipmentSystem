@@ -16,9 +16,17 @@ $sql = "UPDATE Equipment SET
 
 $result = mysqli_query($conn, $sql) or die("Error in query: $sql " . mysqli_error($conn, $sql));
 
+if ($result) {
+    echo "<script type='text/javascript' >";
+    echo "alert('อัพเดตสถานะสำเร็จ!!');";
+    echo "window.location = '../Admin/status.php'; ";
+    echo "</script>";
+} else {
+    echo "<script type='text/javascript'>";
+    echo "alert('อัพเดตสถานะ ไม่สำเร็จ!!');";
+    echo "</script>";
+}
+
 mysqli_close($conn);
 
 ?>
-<!-- <script>
-    window.location = "../Admin/status.php";
-</script> -->

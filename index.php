@@ -1,6 +1,11 @@
 <?php
 if (!isset($_SESSION)) {
   session_start();
+  $session_User_id = $_SESSION['User_id'];
+}
+if ($_SESSION['Active'] == "no") {
+  echo "<script>alert('กรุณารอ การยืนยันการสมัคร จากแอดมิน!!');{document.location.href='http://10.199.66.227/SoftEn2020/Sec03/Perfect/EquipmentSystem/login.php'};</script>";
+  exit();
 }
 if ($_SESSION['User_id'] == "") {
   echo "<script>{document.location.href='http://10.199.66.227/SoftEn2020/Sec03/Perfect/EquipmentSystem/login.php'};</script>";
