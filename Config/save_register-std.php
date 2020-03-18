@@ -11,29 +11,35 @@ $phone = $_GET["phone"];
 $role = "นักศึกษา";
 $Active = "no";
 
-$name = $Prefix. $fname.' '. $lname;
+$name = $Prefix . $fname . ' ' . $lname;
 // //เพิ่มเข้าไปในฐานข้อมูล
 
-$sql = "INSERT INTO user
+$sqlid = "select * from user where User_id = '$user_id'";
+$resultid = mysqli_query($conn, $sqlid);
+$result = mysqli_fetch_array($resultid);
+if (!$result) {
+
+	$sql = "INSERT INTO user
 			 VALUES('$user_id', '$name', '$password', '$phone','$email','$role',CURDATE(),'$Active')";
 
-$result = mysqli_query($conn, $sql) or die("Error in query: $sql " . mysqli_error($conn));
+	$result = mysqli_query($conn, $sql) or die("Error in query: $sql " . mysqli_error($conn));
 
-//ปิดการเชื่อมต่อ database
-mysqli_close($conn);
-//จาวาสคริปแสดงข้อความเมื่อบันทึกเสร็จและกระโดดกลับไปหน้าฟอร์ม
-// if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-// 	echo "<script>alert('กรอกถูกต้องแล้วจ้า');</script>";
-// } else {
-// 	echo "<script>alert('กรอกให้ถูกต้องนะ อิอิ');</script>";
-// }
-if ($result) {
+	//จาวาสคริปแสดงข้อความเมื่อบันทึกเสร็จและกระโดดกลับไปหน้าฟอร์ม
+	if ($result) {
+		echo "<script type='text/javascript' >";
+		echo "alert('ลงทะเบียนสำเร็จ!!\\nกรุณารอการยืนยันการสมัคร ภายใน 24 ชั่วโมง');";
+		echo "window.location = '../login.php'; ";
+		echo "</script>";
+	} else {
+		echo "<script type='text/javascript'>";
+		echo "alert('ลงทะเบียน ไม่สำเร็จ!!');";
+		echo "</script>";
+	}
+	//ปิดการเชื่อมต่อ database
+	mysqli_close($conn);
+}else{
 	echo "<script type='text/javascript' >";
-	echo "alert('ลงทะเบียนสำเร็จ!! \\n กรุณารอการยืนยันการสมัคร ภายใน 24 ชั่วโมง');";
-	echo "window.location = '../login.php'; ";
-	echo "</script>";
-} else {
-	echo "<script type='text/javascript'>";
-	echo "alert('ลงทะเบียน ไม่สำเร็จ!!');";
+	echo "alert('มีผู้ใช้ รหัสนักศึกษา นี้แล้ว\\nกรุณาตรวจสอบความถูกต้อง');";
+	echo "window.location.replace('../register-student.php')";
 	echo "</script>";
 }
